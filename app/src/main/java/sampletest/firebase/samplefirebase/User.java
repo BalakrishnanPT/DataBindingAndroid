@@ -6,7 +6,9 @@ public class User extends BaseObservable {
 
     private String name;
     private String email;
+    private String phno;
 
+    @Bindable
     public String getName() {
         return name;
     }
@@ -22,7 +24,14 @@ public class User extends BaseObservable {
 
     public void setEmail(String email) {
         this.email = email;
-        notifyPropertyChanged(sampletest.firebase.samplefirebase.BR.email);
+    }
+    @Bindable
+    public String getPhno() {
+        return phno;
+    }
+
+    public void setPhno(String phno) {
+        this.phno = phno;
     }
 }
 

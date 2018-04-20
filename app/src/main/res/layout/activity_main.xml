@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="presenter"
-            type="sampletest.firebase.samplefirebase.MainActivity.Presenter"/>
         <variable
             name="user"
             type="sampletest.firebase.samplefirebase.User"/>
@@ -15,48 +13,65 @@
             type="sampletest.firebase.samplefirebase.MainActivity"/>
     </data>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         tools:context=".MainActivity">
 
-        <TextView
+        <EditText
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:hint="Name"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="@={user.name}"
             android:textSize="18sp"
-            android:text="@{user.name}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/name"
+            android:layout_below="@id/name"
+            android:hint="Email"
+            android:gravity="center"
             android:inputType="textEmailAddress"
-            android:text="@={user.email}"/>
+            android:text="@={user.email}"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            />
+        <EditText
+            android:id="@+id/phno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Phno"
+            android:gravity="center"
+            android:inputType="phone"
+            android:layout_below="@id/email"
+            android:textSize="18sp"
+            android:text="@={user.phno}"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            />
+
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/email"
+            android:layout_below="@+id/phno"
             android:text="Get data"
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:onClick="@{(theView)->presenter.onSaveClick()}"/>
+            app:layout_constraintTop_toBottomOf="@+id/phno"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/button"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp"
-            android:text="@{user.email}"/>
+            android:onClick="@{()->activity.onButtonClick()}"/>
 
-    </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>
