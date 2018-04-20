@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="presenter"
+            type="sampletest.firebase.samplefirebase.MainActivity.Presenter"/>
+        <variable
+            name="user"
+            type="sampletest.firebase.samplefirebase.User"/>
+        <variable
+            name="activity"
+            type="sampletest.firebase.samplefirebase.MainActivity"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:text="@{user.name}"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/name"
+            android:inputType="textEmailAddress"
+            android:text="@={user.email}"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/email"
+            android:text="Get data"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:onClick="@{(theView)->presenter.onSaveClick()}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/button"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:text="@{user.email}"/>
+
+    </RelativeLayout>
+</layout>
