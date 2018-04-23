@@ -4,25 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="sampletest.firebase.samplefirebase.DummyData" />
+        <import type="sampletest.firebase.samplefirebase.Entity" />
         <variable
             name="rv_data"
-            type="DummyData" />
+            type="Entity" />
     </data>
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 <TextView
     android:id="@+id/tv_id"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@{rv_data.id}"/>
+    android:text="@{rv_data.name}"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toEndOf="@id/tv_id"
-        android:text="@{rv_data.name}"/>
+        android:text="@{rv_data.phoNo}"/>
 </android.support.constraint.ConstraintLayout>
 </layout>

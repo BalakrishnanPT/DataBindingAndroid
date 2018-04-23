@@ -6,8 +6,9 @@
 
     <data>
         <variable
-            name="user"
-            type="sampletest.firebase.samplefirebase.User"/>
+            name="entity"
+            type="sampletest.firebase.samplefirebase.Entity"/>
+
         <variable
             name="activity"
             type="sampletest.firebase.samplefirebase.MainActivity"/>
@@ -18,7 +19,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         tools:context=".MainActivity">
-
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
@@ -29,33 +29,33 @@
             android:hint="Name"
             android:gravity="center"
             android:inputType="text"
-            android:text="@={user.name}"
+            android:text="@={entity.name}"
             android:textSize="18sp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/useremail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
             android:hint="Email"
             android:gravity="center"
             android:inputType="textEmailAddress"
-            android:text="@={user.email}"
+            android:text="@={entity.email}"
             app:layout_constraintTop_toBottomOf="@+id/name"
             />
         <EditText
-            android:id="@+id/phno"
+            android:id="@+id/phoNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="Phno"
             android:gravity="center"
             android:inputType="phone"
-            android:layout_below="@id/email"
+            android:layout_below="@id/useremail"
             android:textSize="18sp"
-            android:text="@={user.phno}"
-            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:text="@={entity.phoNo}"
+            app:layout_constraintTop_toBottomOf="@+id/useremail"
             />
 
 
@@ -64,14 +64,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/phno"
+            android:layout_below="@+id/phoNo"
             android:text="Get data"
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@+id/phno"
+            app:layout_constraintTop_toBottomOf="@+id/phoNo"
 
             android:onClick="@{()->activity.onButtonClick()}"/>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_entity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/button"
+            >
 
+        </android.support.v7.widget.RecyclerView>
     </android.support.constraint.ConstraintLayout>
 </layout>

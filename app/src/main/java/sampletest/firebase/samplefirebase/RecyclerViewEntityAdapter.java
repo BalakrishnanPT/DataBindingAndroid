@@ -1,6 +1,5 @@
 package sampletest.firebase.samplefirebase;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +10,19 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.BindingHolder> {
-    List<DummyData> list = new ArrayList<>();
+public class RecyclerViewEntityAdapter extends RecyclerView.Adapter<RecyclerViewEntityAdapter.BindingHolder> {
 
-    public RecyclerViewAdapter(List<DummyData> list) {
-        this.list = list;
+
+    private final static String TAG = "Adapter";
+    private List<Entity> mMessageList ;
+
+    public RecyclerViewEntityAdapter(List<Entity> list) {
+        this.mMessageList = list;
+    }
+
+    void setMessageList(final List<Entity> messageList){
+        mMessageList = messageList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -27,14 +34,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        final DummyData book = list.get(position);
+        final Entity book = mMessageList.get(position);
         holder.getBinding().setVariable(BR.rv_data, book);
         holder.getBinding().executePendingBindings();
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mMessageList.size();
     }
 
     public static class BindingHolder extends RecyclerView.ViewHolder {
