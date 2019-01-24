@@ -99,6 +99,7 @@ public class FirebaseQueryLiveData extends LiveData<DataSnapshot> {
 
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
+
         }
 
         @Override

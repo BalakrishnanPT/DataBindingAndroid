@@ -33,7 +33,13 @@ public class MainActivity extends AppCompatActivity {
         Entity entity = new Entity();
         binding.setEntity(entity);
         binding.setActivity(this);
-        adapter = new RecyclerViewEntityAdapter(entities);
+        adapter = new RecyclerViewEntityAdapter(entities,new ClickListener(){
+            @Override
+            public void onLongpress(String s) {
+                mUserModel.remove(s);
+
+            }
+        });
         binding.rvEntity.setAdapter(adapter);
         binding.rvEntity.setLayoutManager(new LinearLayoutManager(this));
         update();
@@ -51,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onButtonClick() {
         mUserModel.createAndSendToDataBase(binding.getEntity());
+    }
+    interface ClickListener{
+        void onLongpress(String s);
     }
 
 }
