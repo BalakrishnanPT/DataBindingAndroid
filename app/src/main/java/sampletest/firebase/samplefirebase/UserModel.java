@@ -56,20 +56,19 @@ public class UserModel extends ViewModel {
     void createAndSendToDataBase(Entity entity) {
         // push the new message to Firebase
         Task uploadTask = dataRef
-                .child("Testing")
                 .push()
                 .setValue(entity);
         uploadTask.addOnSuccessListener(o -> messageUploadIsSuccessful.setValue(true));
     }
 
-    void remove(String s) {
-        Query applesQuery = dataRef.orderByChild("email").equalTo(s);
+    void remove(String s,Actions actions) {
+        Query applesQuery = FirebaseDatabase.getInstance().getReference().child("Testing").orderByChild("email").equalTo(s);
         applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot appleSnapshot : dataSnapshot.getChildren()) {
                     appleSnapshot.getRef().removeValue();
-                    Log.d(TAG, "onDataChange: removed");
+                    actions.removed();
                 }
             }
 
@@ -79,6 +78,8 @@ public class UserModel extends ViewModel {
             }
         });
     }
-
+    interface Actions{
+        void removed();
+    }
 
 }

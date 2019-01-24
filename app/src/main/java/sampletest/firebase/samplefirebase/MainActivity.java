@@ -3,10 +3,10 @@ package sampletest.firebase.samplefirebase;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mUserModel =  ViewModelProviders.of(this).get(UserModel.class);
+        mUserModel = ViewModelProviders.of(this).get(UserModel.class);
         Entity entity = new Entity();
         binding.setEntity(entity);
         binding.setActivity(this);
-        adapter = new RecyclerViewEntityAdapter(entities,new ClickListener(){
+        adapter = new RecyclerViewEntityAdapter(entities, new ClickListener() {
             @Override
             public void onLongpress(String s) {
-                mUserModel.remove(s);
+                mUserModel.remove(s, () -> Toast.makeText(MainActivity.this, "Item Removed", Toast.LENGTH_SHORT).show());
 
             }
         });
@@ -45,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
         update();
 
     }
+
     private void update() {
         // Update the list when the data changes
-        if(mUserModel != null){
+        if (mUserModel != null) {
             LiveData<List<Entity>> liveData = mUserModel.getMessageListLiveData();
             liveData.observe(this, (List<Entity> mEntities) -> {
                 adapter.setMessageList(mEntities);
@@ -55,10 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
     public void onButtonClick() {
         mUserModel.createAndSendToDataBase(binding.getEntity());
     }
-    interface ClickListener{
+
+    interface ClickListener {
         void onLongpress(String s);
     }
 
